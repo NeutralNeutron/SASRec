@@ -1,0 +1,28 @@
+model: SASRec
+dataset: LFM
+data_path: .\Recbole\dataset
+
+field_separator: "\t"
+USER_ID_FIELD: user_id
+ITEM_ID_FIELD: track_id
+TIME_FIELD: time
+
+
+epochs: 1
+
+load_col:
+    inter: [user_id, track_id, time]
+
+
+training_neg_sample_num: 0 
+train_neg_sample_args: 
+
+eval_args:
+    split: {"RS": [0.6, 0.2, 0.2]}
+    group_by: "user"
+    order: "TO"
+    mode: "full"
+    split_mode: "time"  
+
+
+metrics: ['Recall', 'MRR', 'NDCG']
